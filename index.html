@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head >
+            <meta charset="utf-8">   
+            <meta name="author" content="Andrew Mahoney-Fernandes">
+            <!-- tells old IE to render the page similar to Edge if it can -->
+	        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	        <!-- tells mobile devices not to zoom the page; we'll handle appearance changes ourselves! -->
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title> Memory </title>
+            <!-- <link rel="icon" type="image/png" href="./img/pencil-icon.png"> -->
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+            <link href="css/style.css" rel="stylesheet" type="text/css">
+        </head>
+        <body>
+
+            <header role="banner" class="jumbotron">
+                <div class="container">
+                    <h1>Memory Game</h1>
+                    <p class="lead">The point of this game is to find the matches among the cards. If you find a pair you get to keep it, if not than the cards flip back over until you find their match. 
+                        The game will continue until you find every possible match. Press the start buton bellow to begin. Try to beat the game as fast as you can and feel free to restart if you mess up! </p>
+                    <p class="centerthis"><input type="button" class="btn btn-primary start" value="Start">                        
+                        <input type="button" id="cnt" value="0.00"></p>
+                </div>
+            </header>
+
+            <main role="main" class="container">
+                
+                    <section class="flex-container" role="grid">
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image1"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image2"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image3"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image4"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image5"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image6"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image7"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image8"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image9"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image10"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image11"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image12"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image13"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image14"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image15"></div>​
+                        </div>
+                        <div class="flex-column" role="gridcell">
+                                <div class="pic image16"></div>​
+                        </div>
+                    </section>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">You Won!</h4>
+                                </div>
+                                <div class="modal-body">
+                                <p>Press start to play again.<input type="button" class="btn btn-primary start" value="Start"></p>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    
+            </main>
+            <!-- Load script files -->
+            <!-- fetch() and Promise polyfill for browsers that don't yet support it yet (e.g., Safari) -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.auto.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+            <!-- lodash -->
+            <script src="https://cdn.jsdelivr.net/lodash/4.16.6/lodash.min.js"></script>
+            <!-- J-Query -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <!-- Moment -->
+            <script src="js/node_modules/moment/min/moment.min.js"></script>
+            <!-- our script -->
+           <script src="js/app.js"></script>
+
+
+            <script>
+                $(document).ready(function() {
+                    $("p :button.start").click(function start(){
+                        $(this).attr('value', 'Restart').css('background-color','red');
+                        $(".pic").show();
+                        var tiles = resetGame();
+                        for(i=0; i< 16; i++){
+                            $(".image" + (i+1)).append('<button type="button" class="btn face-down img" card="'+ tiles[i].id +'"> </button>')
+                            $(".image" + (i+1) + " :button").css('background-image','url(memory/'+ tiles[i].img +')')
+                        }
+                        var startTime = moment().format('mm.ss');
+                        var intervalID = window.setInterval(time, 1000);
+                        function time(){
+                            var currentTime = moment().format('mm.ss');
+                            var elapsedTime = currentTime - startTime;
+                            elapsedTime = elapsedTime.toFixed(2);
+                            $("#cnt").attr('value', elapsedTime);
+                        }
+                        game();
+                    });
+                });
+            </script>
+        </body>
+    </html>

@@ -1,0 +1,56 @@
+* { box-sizing: border-box;}
+
+header .btn {
+    width: 100px;
+    height: 50px;   
+    font-size: 24px;
+    margin: 0 auto;
+}
+.centerthis{
+    text-align: center;
+}
+
+.jumbotron {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+}
+
+.flex-container {
+    display: flex; 
+    flex-wrap: wrap;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.flex-column {   
+    flex-basis: 25%;
+    margin: 0px;
+    padding: 0px;
+    max-height: 160px;
+}
+
+.pic {
+    background-image: url(../img/card-back.png);
+    min-width: 100%;
+    height: 160px;
+    border: black;
+    border-style: solid;
+    width: 10px;
+    border-radius: 10px;
+    display: none;
+}
+
+ .img {
+    min-width: 100%;
+    height: 160px;
+    border: black;
+    border-style: solid;
+    width: 10px;
+    border-radius: 10px;
+    background-size: cover;
+}
+.face-down {
+    opacity: 0;
+}
+
+
